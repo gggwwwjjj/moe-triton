@@ -1,0 +1,101 @@
+[
+ {
+  "E": 8,
+  "d": 1024,
+  "d_ff": 2048,
+  "T": 16384,
+  "k": 2,
+  "router": "torch",
+  "dispatch": "torch",
+  "layer_fwdbwd_ms": 17.327616691589355,
+  "peak_extra_MiB": 705.56787109375
+ },
+ {
+  "E": 8,
+  "d": 1024,
+  "d_ff": 2048,
+  "T": 16384,
+  "k": 2,
+  "router": "triton",
+  "dispatch": "torch",
+  "layer_fwdbwd_ms": 17.281439781188965,
+  "peak_extra_MiB": 705.56787109375
+ },
+ {
+  "E": 8,
+  "d": 1024,
+  "d_ff": 2048,
+  "T": 16384,
+  "k": 2,
+  "router": "triton",
+  "dispatch": "triton",
+  "layer_fwdbwd_ms": 13.759407997131348,
+  "peak_extra_MiB": 705.626953125
+ },
+ {
+  "E": 64,
+  "d": 1024,
+  "d_ff": 512,
+  "T": 16384,
+  "k": 2,
+  "router": "torch",
+  "dispatch": "torch",
+  "layer_fwdbwd_ms": 9.665536403656006,
+  "peak_extra_MiB": 453.34716796875
+ },
+ {
+  "E": 64,
+  "d": 1024,
+  "d_ff": 512,
+  "T": 16384,
+  "k": 2,
+  "router": "triton",
+  "dispatch": "torch",
+  "layer_fwdbwd_ms": 9.61193561553955,
+  "peak_extra_MiB": 453.34716796875
+ },
+ {
+  "E": 64,
+  "d": 1024,
+  "d_ff": 512,
+  "T": 16384,
+  "k": 2,
+  "router": "triton",
+  "dispatch": "triton",
+  "layer_fwdbwd_ms": 5.901904106140137,
+  "peak_extra_MiB": 389.759765625
+ },
+ {
+  "E": 128,
+  "d": 512,
+  "d_ff": 256,
+  "T": 32768,
+  "k": 2,
+  "router": "torch",
+  "dispatch": "torch",
+  "layer_fwdbwd_ms": 9.657023906707764,
+  "peak_extra_MiB": 466.68994140625
+ },
+ {
+  "E": 128,
+  "d": 512,
+  "d_ff": 256,
+  "T": 32768,
+  "k": 2,
+  "router": "triton",
+  "dispatch": "torch",
+  "layer_fwdbwd_ms": 8.847392082214355,
+  "peak_extra_MiB": 466.69091796875
+ },
+ {
+  "E": 128,
+  "d": 512,
+  "d_ff": 256,
+  "T": 32768,
+  "k": 2,
+  "router": "triton",
+  "dispatch": "triton",
+  "layer_fwdbwd_ms": 5.03108811378479,
+  "peak_extra_MiB": 403.51953125
+ }
+]

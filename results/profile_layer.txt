@@ -1,0 +1,99 @@
+
+===== MoE layer E=64 d=1024 d_ff=512 T=16384 router=torch dispatch=torch (10 fwd+bwd steps) =====
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+ampere_bf16_s1688gemm_bf16_64x128_sliced1x2_ldg8_f2f...         0.00%       0.000us         0.00%       0.000us       0.000us       9.676ms        10.39%       9.676ms     483.817us            20  
+ampere_bf16_s1688gemm_bf16_64x128_sliced1x2_ldg8_f2f...         0.00%       0.000us         0.00%       0.000us       0.000us       9.543ms        10.25%       9.543ms     477.128us            20  
+ampere_bf16_s1688gemm_bf16_64x128_sliced1x2_ldg8_f2f...         0.00%       0.000us         0.00%       0.000us       0.000us       9.483ms        10.19%       9.483ms     474.142us            20  
+void at::native::vectorized_gather_kernel<16, long>(...         0.00%       0.000us         0.00%       0.000us       0.000us       9.478ms        10.18%       9.478ms     236.945us            40  
+void at::native::indexFuncLargeIndex<c10::BFloat16, ...         0.00%       0.000us         0.00%       0.000us       0.000us       7.680ms         8.25%       7.680ms     767.961us            10  
+void (anonymous namespace)::indexing_backward_kernel...         0.00%       0.000us         0.00%       0.000us       0.000us       6.239ms         6.70%       6.239ms     311.971us            20  
+void at::native::elementwise_kernel<128, 4, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       6.159ms         6.62%       6.159ms     205.300us            30  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       5.533ms         5.94%       5.533ms      92.225us            60  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       5.361ms         5.76%       5.361ms     268.046us            20  
+void at::native::(anonymous namespace)::CatArrayBatc...         0.00%       0.000us         0.00%       0.000us       0.000us       3.034ms         3.26%       3.034ms     303.406us            10  
+                         Memcpy DtoD (Device -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us       3.019ms         3.24%       3.019ms     150.951us            20  
+void at::native::index_elementwise_kernel<128, 4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.718ms         2.92%       2.718ms     271.761us            10  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.213ms         2.38%       2.213ms     221.348us            10  
+void at::native::reduce_kernel<512, 1, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us       1.895ms         2.04%       1.895ms      94.765us            20  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       1.803ms         1.94%       1.803ms     180.266us            10  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       1.488ms         1.60%       1.488ms     148.775us            10  
+void at_cuda_detail::cub::DeviceRadixSortOnesweepKer...         0.00%       0.000us         0.00%       0.000us       0.000us       1.152ms         1.24%       1.152ms       8.230us           140  
+void at::native::sbtopk::gatherTopK<float, unsigned ...         0.00%       0.000us         0.00%       0.000us       0.000us     846.468us         0.91%     846.468us      84.647us            10  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us     762.817us         0.82%     762.817us      76.282us            10  
+ampere_bf16_s1688gemm_bf16_128x128_ldg8_f2f_stages_3...         0.00%       0.000us         0.00%       0.000us       0.000us     738.468us         0.79%     738.468us      73.847us            10  
+      ampere_s16816gemm_bf16_128x64_ldg8_stages_32x6_nt         0.00%       0.000us         0.00%       0.000us       0.000us     686.527us         0.74%     686.527us      68.653us            10  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us     270.245us         0.29%     270.245us       1.126us           240  
+void at::native::bitonicSortKVInPlace<2, -1, 16, 16,...         0.00%       0.000us         0.00%       0.000us       0.000us     257.952us         0.28%     257.952us      25.795us            10  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us     210.144us         0.23%     210.144us       7.005us            30  
+void at::native::unrolled_elementwise_kernel<at::nat...         0.00%       0.000us         0.00%       0.000us       0.000us     206.723us         0.22%     206.723us       4.134us            50  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 63.268ms
+Self CUDA time total: 93.095ms
+
+===== MoE layer E=64 d=1024 d_ff=512 T=16384 router=triton dispatch=torch (10 fwd+bwd steps) =====
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+ampere_bf16_s1688gemm_bf16_64x128_sliced1x2_ldg8_f2f...         0.00%       0.000us         0.00%       0.000us       0.000us       9.705ms        10.60%       9.705ms     485.261us            20  
+ampere_bf16_s1688gemm_bf16_64x128_sliced1x2_ldg8_f2f...         0.00%       0.000us         0.00%       0.000us       0.000us       9.608ms        10.50%       9.608ms     480.403us            20  
+ampere_bf16_s1688gemm_bf16_64x128_sliced1x2_ldg8_f2f...         0.00%       0.000us         0.00%       0.000us       0.000us       9.561ms        10.44%       9.561ms     478.051us            20  
+void at::native::vectorized_gather_kernel<16, long>(...         0.00%       0.000us         0.00%       0.000us       0.000us       9.487ms        10.36%       9.487ms     237.177us            40  
+void at::native::indexFuncLargeIndex<c10::BFloat16, ...         0.00%       0.000us         0.00%       0.000us       0.000us       7.738ms         8.45%       7.738ms     773.791us            10  
+void (anonymous namespace)::indexing_backward_kernel...         0.00%       0.000us         0.00%       0.000us       0.000us       6.242ms         6.82%       6.242ms     312.095us            20  
+void at::native::elementwise_kernel<128, 4, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       6.163ms         6.73%       6.163ms     205.431us            30  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       5.533ms         6.04%       5.533ms      92.210us            60  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       5.353ms         5.85%       5.353ms     267.647us            20  
+void at::native::(anonymous namespace)::CatArrayBatc...         0.00%       0.000us         0.00%       0.000us       0.000us       3.036ms         3.32%       3.036ms     303.620us            10  
+                         Memcpy DtoD (Device -> Device)         0.00%       0.000us         0.00%       0.000us       0.000us       3.015ms         3.29%       3.015ms     150.756us            20  
+void at::native::index_elementwise_kernel<128, 4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.724ms         2.98%       2.724ms     272.423us            10  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.228ms         2.43%       2.228ms     222.768us            10  
+void at::native::reduce_kernel<512, 1, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us       1.897ms         2.07%       1.897ms      94.842us            20  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       1.803ms         1.97%       1.803ms     180.253us            10  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       1.492ms         1.63%       1.492ms     149.223us            10  
+void at_cuda_detail::cub::DeviceRadixSortOnesweepKer...         0.00%       0.000us         0.00%       0.000us       0.000us       1.164ms         1.27%       1.164ms       8.314us           140  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us     762.882us         0.83%     762.882us      76.288us            10  
+ampere_bf16_s1688gemm_bf16_128x128_ldg8_f2f_stages_3...         0.00%       0.000us         0.00%       0.000us       0.000us     750.723us         0.82%     750.723us      75.072us            10  
+      ampere_s16816gemm_bf16_128x64_ldg8_stages_32x6_nt         0.00%       0.000us         0.00%       0.000us       0.000us     685.889us         0.75%     685.889us      68.589us            10  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us     273.537us         0.30%     273.537us       1.189us           230  
+void at::native::unrolled_elementwise_kernel<at::nat...         0.00%       0.000us         0.00%       0.000us       0.000us     201.986us         0.22%     201.986us       4.040us            50  
+void (anonymous namespace)::indexing_backward_kernel...         0.00%       0.000us         0.00%       0.000us       0.000us     158.625us         0.17%     158.625us      15.863us            10  
+                                            _router_bwd         0.00%       0.000us         0.00%       0.000us       0.000us     144.163us         0.16%     144.163us      14.416us            10  
+void at_cuda_detail::cub::DeviceRadixSortHistogramKe...         0.00%       0.000us         0.00%       0.000us       0.000us     142.270us         0.16%     142.270us       3.557us            40  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 71.638ms
+Self CUDA time total: 91.542ms
+
+===== MoE layer E=64 d=1024 d_ff=512 T=16384 router=triton dispatch=triton (10 fwd+bwd steps) =====
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+                                                   Name    Self CPU %      Self CPU   CPU total %     CPU total  CPU time avg     Self CUDA   Self CUDA %    CUDA total  CUDA time avg    # of Calls  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+ampere_bf16_s1688gemm_bf16_64x128_sliced1x2_ldg8_f2f...         0.00%       0.000us         0.00%       0.000us       0.000us       9.814ms        18.14%       9.814ms     490.678us            20  
+ampere_bf16_s1688gemm_bf16_64x128_sliced1x2_ldg8_f2f...         0.00%       0.000us         0.00%       0.000us       0.000us       9.776ms        18.07%       9.776ms     488.821us            20  
+ampere_bf16_s1688gemm_bf16_64x128_sliced1x2_ldg8_f2f...         0.00%       0.000us         0.00%       0.000us       0.000us       9.742ms        18.01%       9.742ms     487.120us            20  
+                                           _gather_rows         0.00%       0.000us         0.00%       0.000us       0.000us       5.293ms         9.78%       5.293ms     264.649us            20  
+                                          _gather_sum_k         0.00%       0.000us         0.00%       0.000us       0.000us       3.572ms         6.60%       3.572ms     178.593us            20  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       2.223ms         4.11%       2.223ms     222.269us            10  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       1.807ms         3.34%       1.807ms     180.692us            10  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       1.783ms         3.30%       1.783ms     178.282us            10  
+                                              _rowdot_k         0.00%       0.000us         0.00%       0.000us       0.000us       1.744ms         3.22%       1.744ms     174.404us            10  
+void at::native::vectorized_elementwise_kernel<4, at...         0.00%       0.000us         0.00%       0.000us       0.000us       1.493ms         2.76%       1.493ms     149.280us            10  
+void at::native::elementwise_kernel<128, 4, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us       1.187ms         2.19%       1.187ms     118.704us            10  
+void cutlass::Kernel2<cutlass_80_tensorop_bf16_s1681...         0.00%       0.000us         0.00%       0.000us       0.000us     763.458us         1.41%     763.458us      76.346us            10  
+ampere_bf16_s1688gemm_bf16_128x128_ldg8_f2f_stages_3...         0.00%       0.000us         0.00%       0.000us       0.000us     742.978us         1.37%     742.978us      74.298us            10  
+      ampere_s16816gemm_bf16_128x64_ldg8_stages_32x6_nt         0.00%       0.000us         0.00%       0.000us       0.000us     685.633us         1.27%     685.633us      68.563us            10  
+void at::native::reduce_kernel<512, 1, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us     669.731us         1.24%     669.731us      66.973us            10  
+void at_cuda_detail::cub::DeviceRadixSortOnesweepKer...         0.00%       0.000us         0.00%       0.000us       0.000us     592.514us         1.10%     592.514us       7.406us            80  
+void at::native::unrolled_elementwise_kernel<at::nat...         0.00%       0.000us         0.00%       0.000us       0.000us     162.562us         0.30%     162.562us       4.064us            40  
+                                            _router_bwd         0.00%       0.000us         0.00%       0.000us       0.000us     145.602us         0.27%     145.602us      14.560us            10  
+                                        Memset (Device)         0.00%       0.000us         0.00%       0.000us       0.000us     144.128us         0.27%     144.128us       1.310us           110  
+                                            _router_fwd         0.00%       0.000us         0.00%       0.000us       0.000us     139.553us         0.26%     139.553us      13.955us            10  
+void at::native::vectorized_elementwise_kernel<2, at...         0.00%       0.000us         0.00%       0.000us       0.000us     134.148us         0.25%     134.148us       4.472us            30  
+void at::native::_scatter_gather_elementwise_kernel<...         0.00%       0.000us         0.00%       0.000us       0.000us     108.226us         0.20%     108.226us       5.411us            20  
+void at::native::elementwise_kernel<128, 2, at::nati...         0.00%       0.000us         0.00%       0.000us       0.000us      98.978us         0.18%      98.978us       2.474us            40  
+void at::native::reduce_kernel<512, 1, at::native::R...         0.00%       0.000us         0.00%       0.000us       0.000us      96.446us         0.18%      96.446us       3.215us            30  
+void at::native::index_elementwise_kernel<128, 4, at...         0.00%       0.000us         0.00%       0.000us       0.000us      94.913us         0.18%      94.913us       4.746us            20  
+-------------------------------------------------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  ------------  
+Self CPU time total: 36.129ms
+Self CUDA time total: 54.102ms

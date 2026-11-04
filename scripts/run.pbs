@@ -1,0 +1,36 @@
+#!/bin/bash
+#PBS -N moe-triton
+#PBS -l select=1:ncpus=16:ngpus=1:mem=64gb
+#PBS -l walltime=02:00:00
+#PBS -j oe
+# usage (from the repo root): qsub -v MODE=test|bench|train|train_full scripts/run.pbs
+# add your cluster's project / queue options; set PY to a python with requirements.txt installed
+set -euo pipefail
+MODE=${MODE:-test}
+ROOT=${PBS_O_WORKDIR:-$PWD}
+PY=${PY:-python}
+cd $ROOT
+mkdir -p results/train logs
+export PYTHONFAULTHANDLER=1 OPENBLAS_NUM_THREADS=1
+echo "host $(hostname) mode $MODE start $(date)"
+# timed prechecks: fail fast if the node/GPU/env is broken
+timeout 60 nvidia-smi --query-gpu=name,memory.used,memory.total --format=csv
+timeout 180 $PY -X faulthandler -c "import time,torch,triton;t=time.time();x=torch.randn(1024,1024,device='cuda');(x@x).sum().item();print('torch',torch.__version__,'triton',triton.__version__,torch.cuda.get_device_name(),f'{time.time()-t:.1f}s')"
+
+run() { timeout ${TMO:-3000} $PY -X faulthandler "$@"; }
+case $MODE in
+  test)  run scripts/test_correctness.py results/correctness.json ;;
+  bench) run scripts/test_correctness.py results/correctness.json && run scripts/bench.py results ;;
+  train)
+    D=data/tinystories_200MB.txt
+    run scripts/train.py dense       --data $D --steps ${STEPS:-5000}
+    run scripts/train.py moe_torch   --data $D --steps ${STEPS:-5000} --moe --router torch
+    run scripts/train.py moe_triton  --data $D --steps ${STEPS:-5000} --moe --router triton
+    run scripts/train.py moe_noaux   --data $D --steps ${STEPS:-5000} --moe --router triton --aux 0
+    ;;
+  train_full)
+    run scripts/train.py moe_triton_full --data data/tinystories_200MB.txt --steps ${STEPS:-5000} --moe --router triton --dispatch triton ;;
+  smoke)
+    run scripts/train.py smoke --data data/tinystories_200MB.txt --moe --router triton --steps 60 --out results/smoke ;;
+esac
+echo "done $(date)"
